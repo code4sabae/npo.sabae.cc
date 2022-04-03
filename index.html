@@ -1,5 +1,38 @@
 <!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
-<title>鯖江のNPO</title>
+<title>鯖江のNPO活動</title>
+<style>
+body {
+	background-color: white;
+	color: black;
+}
+h1 {
+	color: black;
+}
+</style>
 </head>
 <body>
+<h1>鯖江のNPO活動</h1>
+<ul id="list">
+</ul>
+<hr>
+Data: <a href=https://github.com/code4fukui/opendata_fukui>鯖江のNPO活動 - 福井県のオープンデータ</a><br>
+App: <a href=https://github.com/code4sabae/npo.sabae.cc/>npo.sabae.cc src on GitHub</a><br>
+
+
+<script type="module">
+import { CSV } from "https://js.sabae.cc/CSV.js";
+
+onload = async () => {
+	const url = "https://code4fukui.github.io/opendata_fukui/sabae_npo_act.csv";
+	const data = CSV.toJSON(await CSV.fetch(url));
+	for (const d of data) {
+		const li = document.createElement("li");
+		const a = document.createElement("a");
+		a.href = d.url;
+		a.textContent = d.name;
+		li.appendChild(a);
+		list.appendChild(li);
+	}
+};
+</script>
 </body>
